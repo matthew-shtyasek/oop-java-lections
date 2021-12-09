@@ -1,15 +1,11 @@
 package solutions;
 
-import com.sun.deploy.security.ruleset.ExceptionRule;
-import com.sun.xml.internal.ws.commons.xmlutil.Converter;
-import javafx.application.Application;
-
+import solutions.NumericalCharacteristics.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 
 public class Tester {
     private static PrintStream out = System.out;
@@ -17,7 +13,132 @@ public class Tester {
     private static int counter;
 
     public static void main(String[] args) {
-        System.setOut(customOut);
+        //separator(); //task e
+        //tictactoe(); //task f
+        //numericalCharacteristics(); //task g
+        //point(); //task h
+        reversedMyList(); //task i
+        //table(); //task k
+    }
+
+    public static void separator() { //Task E
+        Separator sep = new Separator();
+        Separator sep2 = new Separator(1, -2, 3, 4, -5);
+        sep.add(1);
+        sep.add(-3);
+        sep.add(100);
+        sep.add(0);
+        sep.add(-1000);
+        System.out.println(sep.isZeroExist());
+        System.out.println(sep2.isZeroExist());
+        System.out.println(sep.positive().toString());
+        System.out.println(sep.negative().toString());
+    }
+
+    public static void tictactoe() { //Task F
+        TicTacToe ttt = new TicTacToe();
+        ttt.showTable();
+        ttt.makeToMove(1, 1);
+        ttt.makeToMove(1, 1);
+        ttt.makeToMove(2, 1);
+        ttt.makeToMove(2, 2);
+        ttt.makeToMove(2, 3);
+        ttt.makeToMove(3, 3);
+        ttt.makeToMove(3, 2);
+        ttt.showTable();
+        ttt.restart();
+        ttt.showTable();
+        ttt.makeToMove(1, 1);
+        ttt.makeToMove(1, 1);
+        ttt.makeToMove(2, 1);
+        ttt.makeToMove(2, 2);
+        ttt.makeToMove(2, 3);
+        ttt.makeToMove(3, 3);
+        ttt.makeToMove(3, 2);
+        ttt.showTable();
+    }
+
+    public static void numericalCharacteristics() { //task g
+        MinValue min = new MinValue();
+        min.add(1);
+        min.add(-100);
+        min.add(0);
+
+        MaxValue max = new MaxValue();
+        max.add(-100);
+        max.add(0);
+        max.add(101);
+        max.add(1);
+
+        MeanValue mean = new MeanValue();
+        mean.add(1);
+        mean.add(-1);
+        mean.add(10);
+
+        MedianValue median = new MedianValue();
+        median.add(1);
+        median.add(5);
+        median.add(2);
+        median.add(3);
+
+        System.out.println(min.getResult()); //min
+        System.out.println(max.getResult()); //max
+        System.out.println(mean.getResult()); //mean
+        System.out.println(median.getResult()); //median
+    }
+
+    public static void point() { //task h
+        Point2D point = new Point2D();
+        Point2D point2 = new Point2D(3, 4);
+        point.setX(10);
+        point.setY(100);
+
+        System.out.println(point2.getX()); //get x, y
+        System.out.println(point2.getY());
+        System.out.println(point); //toString()
+        System.out.println(point2);
+        System.out.println(String.format("%s + %s = %s", point, point2, point.add(point2))); //add
+        System.out.println(String.format("%s - %s = %s", point, point2, point.sub(point2))); //sub
+        System.out.println(String.format("%s * %s = %s", point, point2, point.mul(point2))); //mul
+
+        point2 = new Point2D(point.getX(), point.getY());
+
+        System.out.println(String.format("%s > %s = %s", point, point2, point.gt(point2))); //>
+        System.out.println(String.format("%s >= %s = %s", point, point2, point.ge(point2))); //>=
+        System.out.println(String.format("%s < %s = %s", point, point2, point.lt(point2))); //<
+        System.out.println(String.format("%s <= %s = %s", point, point2, point.le(point2))); //<=
+
+        System.out.println(String.format("%s == %s = %s", point, point2, point.eq(point2))); //==
+        System.out.println(String.format("%s != %s = %s", point, point2, point.ne(point2))); //!=
+    }
+
+    public static void reversedMyList() { //task I
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(-1);
+        ReversedMyList<Integer> r = new ReversedMyList<Integer>(list);
+
+        System.out.println("ReversedMyList:");
+        for (int i = 0; i < r.len(); ++i) {
+            System.out.println(r.get(i));
+        }
+    }
+
+
+
+    public static void table() { //Task K
+        MyTable table = new MyTable(10, 10);
+        for (int i = 0; i < 10; ++i)
+            for (int j = 0; j < 10; ++j)
+                table.setValue(i, j, new Random().nextInt(100));
+
+        table.showTable();
+        System.out.println("======================================================");
+        table.addRow(9);
+        table.addCol(3);
+        table.showTable();
     }
 
     //===================================Test Methods======================================//

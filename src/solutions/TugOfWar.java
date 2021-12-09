@@ -5,7 +5,7 @@ public class TugOfWar {
                 countRight = 0;
 
     public void addLeft(int countLeft) { this.countLeft = countLeft; }
-    public void addRight(int countRight) {this.countRight = countRight; }
+    public void addRight(int countRight) { this.countRight = countRight; }
     public char result() {
         switch (Integer.compare(this.countLeft, this.countRight)) {
             case 1: return 'L';

@@ -1,8 +1,6 @@
 package solutions;
 
 public class TugOfWar {
-    private int countLeft = 0,
-                countRight = 0;
 
     public void addLeft(int countLeft) { this.countLeft = countLeft; }
     public void addRight(int countRight) { this.countRight = countRight; }

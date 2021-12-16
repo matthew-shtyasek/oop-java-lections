@@ -1,5 +1,7 @@
 package solutions;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,13 @@ public class MyQueque<T> {
     }
 
     public T pop() {
+        if (list.size() == 0) {
+            try {
+                return (T) new Integer(0);
+            } catch(Exception e) {
+                return null;
+            }
+        }
         T temp = list.get(0);
         list.remove(0);
         return temp;
@@ -43,7 +52,14 @@ public class MyQueque<T> {
         this.list.addAll(other.list);
     }
 
-    public boolean equals(MyQueque<T> other) {
+    @Override
+    public boolean equals(Object oother) {
+        MyQueque<T> other;
+        try {
+            other = (MyQueque<T>)oother;
+        } catch (Exception e) {
+            return false;
+        }
         if (this.list.size() != other.list.size()) return false;
         for (int i = 0; i < this.list.size(); ++i)
             if (this.list.get(i) != other.list.get(i)) return false;
@@ -51,12 +67,12 @@ public class MyQueque<T> {
     }
 
     public MyQueque<T> shiftR(int sh) {
-        if (sh < 0 || sh > this.list.size() - 1) return null;
+        if (sh < 0 || sh > this.list.size()) return null;
         return new MyQueque<T>(this.list.subList(sh, list.size()));
     }
 
     public MyQueque<T> shiftL(int sh) {
-        if (sh < 0 || sh > this.list.size() - 1) return null;
+        if (sh < 0 || sh > this.list.size()) return null;
         return new MyQueque<T>(this.list.subList(0, list.size() - sh));
     }
 
@@ -70,6 +86,6 @@ public class MyQueque<T> {
         stringBuilder.append('[');
         for (T el : this.list)
             stringBuilder.append(el).append(" -> ");
-        return stringBuilder.substring(0, stringBuilder.length() - 4) + ']';
+        return stringBuilder.length() > 1 ? stringBuilder.substring(0, stringBuilder.length() - 4) + ']' : stringBuilder.toString() + ']';
     }
 }

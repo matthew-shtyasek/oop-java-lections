@@ -1,9 +1,6 @@
 package solutions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class TicTacToe {
     private final static int SIZE_TABLE = 3;

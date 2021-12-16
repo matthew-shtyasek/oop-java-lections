@@ -18,6 +18,10 @@ public class Bridge {
 
         private Color color;
 
+        public Triangle(int a, int b, int c) {
+            this(a, b, c, null);
+        }
+
         public Triangle(int a, int b, int c, Color color) {
             this.a = a;
             this.b = b;
@@ -27,7 +31,7 @@ public class Bridge {
 
         @Override
         public double square() {
-            double p = (a + b + c) / 2;
+            double p = (a + b + c) / 2.0;
             return Math.sqrt(p * (p - a) * (p - b) * (p - c));
         }
 
@@ -38,7 +42,7 @@ public class Bridge {
 
         @Override
         public String whoAreYou() {
-            return "Треугольник " + color.getName();
+            return "Треугольник " + (color == null ? "" : color.getName());
         }
     }
 
@@ -48,6 +52,10 @@ public class Bridge {
                     b;
 
         private Color color;
+
+        public Rectangle(int a, int b) {
+            this(a, b, null);
+        }
 
         public Rectangle(int a, int b, Color color) {
             this.a = a;
@@ -67,11 +75,15 @@ public class Bridge {
 
         @Override
         public String whoAreYou() {
-            return "Прямоугольник " + color.getName();
+            return "Прямоугольник " + (color == null ? "" : color.getName());
         }
     }
 
     public static class Square extends Rectangle {
+
+        public Square(int a) {
+            this(a, null);
+        }
 
         public Square(int a, Color color) {
             super(a, a, color);
@@ -79,7 +91,7 @@ public class Bridge {
 
         @Override
         public String whoAreYou() {
-            return "Квадрат " + super.color.getName();
+            return "Квадрат " + (super.color == null ? "" : super.color.getName());
         }
     }
 
@@ -138,6 +150,11 @@ public class Bridge {
             this.r = r;
             this.g = g;
             this.b = b;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("RGB(%d, %d, %d)", this.r, this.g, this.b);
         }
     }
 

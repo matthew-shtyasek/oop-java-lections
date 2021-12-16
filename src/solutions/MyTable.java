@@ -8,7 +8,7 @@ public class MyTable {
     private int[][] table;
 
     public MyTable(int rows, int cols) {
-        if (rows <= 0 || cols <= 0) throw new IndexOutOfBoundsException("В качестве количества строк или столбцов использованы отрицательные числа");
+        if (rows <= 0 || cols <= 0) throw new IndexOutOfBoundsException("В качестве количества строк или столбцов использованы неположительные числа");
         this.table = new int[rows][cols];
         for (int[] row : this.table)
             Arrays.fill(row, 0);
@@ -24,15 +24,22 @@ public class MyTable {
             this.table[row][col] = value;
     }
 
-    public int nRows() { return this.table.length; }
-    public int nCols() { return this.table[0].length; }
+    public int nRows() {
+        return this.table.length;
+    }
+
+    public int nCols() {
+        return this.table[0].length;
+    }
 
     public void removeRow(int row) {
         if (!isIndexExsist(row, 0) || nRows() == 1) return;
         int[][] arr = new int[this.nRows() - 1][this.nCols()];
-        for (int i = 0; i < nRows(); ++i)
+        for (int i = 0, j = 0; i < nRows(); ++i, ++j)
             if (i != row)
-                arr[i] = this.table[i];
+                arr[j] = this.table[i];
+            else
+                --j;
         this.table = arr;
     }
 
@@ -86,6 +93,6 @@ public class MyTable {
     }
 
     private boolean isIndexExsist(int row, int col) {
-        return this.nRows() > row && this.nCols() > col;
+        return this.nRows() > row && this.nCols() > col && row >= 0 && col >= 0;
     }
 }
